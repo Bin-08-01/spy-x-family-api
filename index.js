@@ -34,11 +34,13 @@ app.get("/v1", (req, resp) => {
         const name = $(this).find("a").attr("title");
         const url = $(this).find("a").attr("href");
         const image = $(this).find("a > img").attr("data-src");
-        thumbnails.push({
-          name: name,
-          url: "https://spy-x-family.onrender.com/v1" + url.split("/wiki")[1],
-          image: image,
-        });
+        if (name !== "List of Characters") {
+          thumbnails.push({
+            name: name,
+            url: "https://spy-x-family.onrender.com/v1" + url.split("/wiki")[1],
+            image: image,
+          });
+        }
       });
       if (limit && limit > 0) {
         resp.status(200).json(thumbnails.slice(0, limit));
